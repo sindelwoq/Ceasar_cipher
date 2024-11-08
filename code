@@ -1,0 +1,80 @@
+using System;
+
+class Program
+{
+    static char[] russianLetters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя".ToCharArray();
+
+    static void Main(string[] args)
+    {
+        while (true) // Бесконечный цикл
+        {
+            Console.Write("Выберите действие: 1) зашифровать, 2) расшифровать, 3) для выхода: ");
+            int choise = int.TryParse(Console.ReadLine(), out choise) ? choise : 1;
+
+
+            if (choise == 3)
+            {
+                break; // Выходим из цикла, если выбрано 0
+            }
+
+            Console.Write("Введите сообщение: ");
+            string message = Console.ReadLine();
+
+            Console.Write("Введите число: ");
+            int offset = int.TryParse(Console.ReadLine(), out offset) ? offset : 0;
+
+            if (choise == 1)
+                Console.WriteLine("Зашифрованное сообщение: " + GetEncryptedMessage(message, offset));
+            else
+            {
+                Console.WriteLine("Расшифрованное сообщение: " + GetDescryptedMessage(message, offset));
+            }
+
+            Console.ReadKey(); // Добавить пустую строку для лучшей читаемости
+        }
+    }
+
+    private static string GetEncryptedMessage(string message, int offset)
+    {
+        char[] result = new char[message.Length];
+
+        int indexOfElement;
+        int indexOfNewElement;
+
+        for (int i = 0; i < message.Length; i++)
+        {
+            indexOfElement = Array.IndexOf(russianLetters, Char.ToLower(message[i]));
+
+            if (indexOfElement != -1)
+            {
+                indexOfNewElement = (indexOfElement + offset) % russianLetters.Length;
+                result[i] = Char.IsLower(message[i]) ? russianLetters[indexOfNewElement] : Char.ToUpper(russianLetters[indexOfNewElement]);
+            }
+            else
+                result[i] = message[i];
+        }
+        return new string(result);
+    }
+
+    private static string GetDescryptedMessage(string message, int offset)
+    {
+        char[] result = new char[message.Length];
+
+        int indexOfElement;
+        int indexOfNewElement;
+
+        for (int i = 0; i < message.Length; i++)
+        {
+            indexOfElement = Array.IndexOf(russianLetters, Char.ToLower(message[i]));
+
+            if (indexOfElement != -1)
+            {
+                indexOfNewElement = (russianLetters.Length - (offset - indexOfElement) % russianLetters.Length) % russianLetters.Length;
+                result[i] = Char.IsLower(message[i]) ? russianLetters[indexOfNewElement] : Char.ToUpper(russianLetters[indexOfNewElement]);
+            }
+            else
+                result[i] = message[i];
+        }
+        return new string(result);
+    }
+}
