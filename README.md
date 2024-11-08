@@ -4,7 +4,7 @@
 - [Visual Studio](https://visualstudio.microsoft.com/ru/)
 - [Online C# Compiler](https://www.onlinegdb.com/online_csharp_compiler)
 ## Использование
-Для использования программы необходимо скопировать код из ветки Main данного репозитория и вставить в одну из предложенных программ.
+Для использования программы необходимо скопировать [код](https://github.com/sindelwoq/Ceasar_cipher/blob/main/code) из ветки Main данного репозитория и вставить в одну из предложенных программ.
 
 После запуска программы в консоль выводится:
 
